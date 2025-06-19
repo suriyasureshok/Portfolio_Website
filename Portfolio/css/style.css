@@ -1,0 +1,453 @@
+/* --- Global Styles & Variables --- */
+:root {
+    --primary-color: #24a2d8; /* A strong, professional blue */
+    --bg-color: #121212;      
+    --surface-color: #1e1e1e; 
+    --text-color: #e0e0e0;
+    --heading-color: #ffffff;
+    --font-heading: 'Poppins', sans-serif;
+    --font-body: 'Poppins', sans-serif;
+    --font-code: 'Roboto Mono', monospace;
+}
+
+/* --- Basic Reset & Smooth Scroll --- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--font-body);
+    line-height: 1.7;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.container { max-width: 1100px; margin: auto; padding: 0 2rem; }
+h1, h2, h3 { font-family: var(--font-heading); color: var(--heading-color); font-weight: 600; }
+
+h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--primary-color);
+    border-radius: 2px;
+}
+
+section { padding: 6rem 0; }
+
+/* --- Header & Navigation --- */
+header {
+    background: rgba(18, 18, 18, 0.85);
+    backdrop-filter: blur(10px);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+header .container { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 1.5rem; font-weight: 700; color: var(--heading-color); }
+nav ul { display: flex; list-style: none; }
+nav ul li { margin-left: 25px; }
+nav a { color: var(--text-color); text-decoration: none; font-weight: 500; transition: color 0.3s ease; }
+nav a:hover { color: var(--primary-color); }
+
+/* --- Hero Section --- */
+.hero { min-height: 90vh; display: flex; align-items: center; text-align: center; }
+.hero h1 { font-size: 3.5rem; font-weight: 700; }
+.hero .highlight { color: var(--primary-color); }
+.hero .subtitle { font-size: 1.5rem; color: var(--text-color); margin: 0.5rem 0; font-weight: 400; }
+.hero .intro { font-size: 1.1rem; max-width: 650px; margin: 1rem auto; }
+
+/* --- About Section --- */
+#about { background-color: var(--surface-color); }
+.about-content { display: flex; align-items: center; gap: 3rem; }
+.profile-pic { width: 250px; height: 250px; border-radius: 50%; object-fit: cover; border: 5px solid var(--primary-color); }
+.about-text { flex: 1; }
+
+
+/*
+================================================================
+  UPGRADED PROJECT CARD STYLES
+================================================================
+*/
+#projects {
+    background: var(--bg-color);
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 2rem;
+}
+
+.project-card {
+    background: var(--surface-color);
+    border-radius: 10px;
+    display: flex;
+    overflow: hidden;
+    border: 1px solid #2a2a2a;
+    transition: all 0.3s ease;
+}
+
+.project-card:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-color: var(--primary-color);
+}
+
+.project-image-container {
+    position: relative;
+    overflow: hidden;
+    flex: 0 0 200px;
+}
+
+/* THIS IS THE ONLY CHANGE - THE FIX FOR THE VIDEO SIZING */
+.project-image-container img,
+.project-image-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease-out;
+}
+
+.project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(18, 18, 18, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.3s ease;
+}
+
+.project-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.project-links a {
+    color: #fff;
+    font-size: 1.75rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.project-links a:hover {
+    color: var(--primary-color);
+    transform: scale(1.2);
+}
+
+.project-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-content h3 {
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.project-content p {
+    flex-grow: 1;
+    margin-bottom: 1rem;
+    color: #ccc;
+    font-size: 0.95rem;
+}
+
+.project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tech-tag {
+    background-color: #333;
+    color: var(--text-color);
+    padding: 0.3rem 0.7rem;
+    border-radius: 4px;
+    font-family: var(--font-code);
+    font-size: 0.85rem;
+}
+
+.project-card:hover .project-overlay {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* This rule was missing the "video" tag, it's added now for consistency */
+.project-card:hover .project-image-container img,
+.project-card:hover .project-image-container video {
+    transform: scale(1.1);
+}
+
+
+/* --- Contact Section --- */
+#contact { text-align: center; }
+#contact p { max-width: 500px; margin: 0 auto 2rem auto; }
+.contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+.contact-item {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--heading-color);
+    text-decoration: none;
+    padding: 1rem 2rem;
+    background: var(--surface-color);
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.contact-item:hover { background-color: var(--primary-color); color: #fff; }
+
+
+/* 
+================================================================
+  HERO SECTION BUTTONS - The Corrected Fix
+================================================================
+*/
+.hero-buttons {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.hero-buttons a {
+    display: inline-block;
+    padding: 10px 28px;
+    font-weight: 600;
+    border-radius: 5px;
+    text-decoration: none;
+    border: 2px solid var(--primary-color);
+    transition: all 0.3s ease;
+    margin: 0;
+}
+
+.hero-buttons .btn {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+.hero-buttons .btn-secondary {
+    background: transparent;
+    color: var(--primary-color);
+}
+
+.hero-buttons .btn:hover {
+    background: #3e1cd6;
+    border-color: #3e1cd6;
+}
+
+.hero-buttons .btn-secondary:hover {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+/*
+================================================================
+  NEW SKILLS SECTION STYLING
+================================================================
+*/
+#skills {
+    background-color: var(--bg-color);
+}
+
+.skill-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+.skill-card {
+    background: var(--surface-color);
+    border-radius: 10px;
+    padding: 2rem;
+    border: 1px solid #2a2a2a;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.skill-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+}
+
+.skill-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.skill-card h3 i {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+}
+
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.skill-tag {
+    background-color: #333;
+    color: var(--text-color);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-family: var(--font-code);
+    font-size: 0.9rem;
+}
+
+/*
+================================================================
+  UPGRADED FOOTER STYLING
+================================================================
+*/
+footer {
+    background-color: var(--surface-color);
+    padding: 4rem 0 2rem;
+    text-align: center;
+    color: var(--text-color);
+    border-top: 1px solid #2a2a2a;
+}
+
+.footer-bio {
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #ccc;
+}
+
+.footer-credits {
+    margin: 2rem 0;
+    font-size: 1.1rem;
+}
+
+.footer-credits .heart {
+    color: #e74c3c;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2rem;
+    border-top: 1px solid #2a2a2a;
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+.footer-deploy .heart {
+    color: #e74c3c;
+}
+
+.footer-github-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #aaa;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-github-link:hover {
+    color: var(--primary-color);
+}
+
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    header .container { flex-direction: column; gap: 1rem; }
+    .about-content { flex-direction: column; text-align: center; }
+    .profile-pic { width: 180px; height: 180px; }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    /* New Project Card Responsive Styles */
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .project-card {
+        flex-direction: column;
+    }
+
+    .project-image-container {
+        flex-basis: 200px;
+    }
+}
+
+#certificates {
+    padding: 60px 0;
+    background-color: #121212;
+    color: #FFFFFF;
+}
+
+.certificate-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+.certificate-card {
+    background: var(--surface-color);
+    border-radius: 10px;
+    padding: 1rem;
+    border: 1px solid #2a2a2a;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.certificate-card:hover{
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+}
+
+.certificate-card img {
+    width: 100%;
+    height: 70%;
+    display: block;
+    border-radius: 10px;
+}
+
+.certificate-details {
+    padding: 16px;
+}
+
+.certificate-details h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.certificate-details p {
+    font-size: 0.95rem;
+    color: #CCCCCC;
+}
